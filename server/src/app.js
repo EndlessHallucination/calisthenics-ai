@@ -1,4 +1,6 @@
 const express = require("express");
+const cors = require("cors");
+
 const app = express();
 const skillsRouter = require("./routes/skills");
 const profileRouter = require("./routes/profile");
@@ -7,6 +9,11 @@ const workoutRouter = require("./routes/workouts");
 
 app.use(express.json());
 
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  }),
+);
 app.use("/api/skills", skillsRouter);
 
 app.use("/api/profile", profileRouter);
