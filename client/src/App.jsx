@@ -3,6 +3,7 @@ import Setup from './pages/Setup'
 import Dashboard from './pages/Dashboard'
 // import Workout from './pages/Workout'
 // import History from './pages/History'
+import SkillPicker from './pages/SkillPicker'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/setup" element={<Setup />} />
+        <Route path="/skills" element={<SkillPicker />} />
         {/* <Route path="/workout" element={<Workout />} /> */}
         {/* <Route path="/history" element={<History />} /> */}
       </Routes>

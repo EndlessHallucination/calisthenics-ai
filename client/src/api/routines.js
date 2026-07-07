@@ -9,3 +9,10 @@ export const getActiveRoutine = async (id) => {
     throw error;
   }
 };
+
+export const generateRoutine = async (skillId) => {
+  const { data } = await client.post("/routines/generate", {
+    skill_id: skillId,
+  });
+  return data;
+};
