@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 
 import { getActiveSkills } from "../api/skills"
 import { getActiveRoutine } from '../api/routines'
-import { createWorkout, logExercises } from '../api/workout'
+import { createWorkout, logExercises } from '../api/workouts'
 
 export default function Workout() {
     const [selectedSkillId, setSelectedSkillId] = useState(null)

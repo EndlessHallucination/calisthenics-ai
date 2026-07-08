@@ -11,3 +11,8 @@ export const logExercises = async (workoutId, exercises) => {
   });
   return data;
 };
+
+export const getWorkouts = async (skillId) => {
+  const { data } = await client.get(`/workouts?skill_id=${skillId}`);
+  return data;
+};
