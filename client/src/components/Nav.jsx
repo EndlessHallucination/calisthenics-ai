@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { BrowserRouter, href, Link, NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 function Nav() {
     const [isOpen, setIsOpen] = useState(false)
 
     const navLinks = [
-        { title: "Dashboard", href: '/' },
+
+        { title: "Dashboard", href: '/dashboard' },
         { title: "Skill Picker", href: '/skills' },
         { title: "Log Workout", href: '/workout' },
         { title: "History", href: '/history' }

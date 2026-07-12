@@ -37,6 +37,7 @@ export default function Setup() {
         mutationFn: createProfile,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['profile'] })
+            navigate('/dashboard')  
         },
         onError: (error) => {
             console.error("Failed to save profile:", error);
