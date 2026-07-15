@@ -3,18 +3,17 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { createProfile } from "../api/profile";
 
-export default function ProfileForm({ onSuccess }) {
+export default function ProfileForm({ onSuccess, initialData }) {
     const queryClient = useQueryClient();
-
+    const [error, setError] = useState(null)
     const [formData, setFormData] = useState({
-        experience: "",
-        days_per_week: "",
-        session_duration_minutes: "",
-        height_cm: "",
-        weight_kg: "",
-        age: "",
+        experience: initialData?.experience || "",
+        days_per_week: initialData?.days_per_week || '',
+        session_duration_minutes: initialData?.session_duration_minutes || "",
+        height_cm: initialData?.height_cm || "",
+        weight_kg: initialData?.weight_kg || "",
+        age: initialData?.age || "",
     });
-
     const { mutate, isPending } = useMutation({
         mutationFn: createProfile,
         onSuccess: () => {
@@ -41,10 +40,21 @@ export default function ProfileForm({ onSuccess }) {
 
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        mutate(formData);
-    };
+        if (formData.days_per_week < 1 || formData.days_per_week > 7) {
+            setError('Training days must be between 1 and 7')
+            return
+        }
+        if (formData.session_duration_minutes < 15) {
+            setError('Session must be at least 15 minutes')
+            return
+        }
+
+        setError(null)
+        mutate(formData)
+    }
+
 
 
     return (
@@ -113,6 +123,7 @@ export default function ProfileForm({ onSuccess }) {
                             disabled={isPending}
                             className="bg-zinc-900 border border-zinc-800 text-white rounded-lg px-4 py-3"
                         />
+
                     </div>
 
 
@@ -167,7 +178,7 @@ export default function ProfileForm({ onSuccess }) {
 
                     </div>
 
-
+                    {error && <p className="text-red-400 text-sm">{error}</p>}
                     <button
                         type="submit"
                         disabled={isPending}

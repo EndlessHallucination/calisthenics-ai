@@ -35,6 +35,13 @@ const SkillCard = ({ skill }) => {
         }
     })
 
+    const sections = routine?.exercises?.reduce((acc, ex) => {
+        const section = ex.section || 'Other'
+        if (!acc[section]) acc[section] = []
+        acc[section].push(ex)
+        return acc
+    }, {}) || {}
+
     return (
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
             <div className="flex items-start justify-between mb-6">
@@ -72,17 +79,22 @@ const SkillCard = ({ skill }) => {
                 <div>
                     <p className="text-zinc-500 text-xs uppercase tracking-widest mb-3">Today's Routine</p>
                     <div className="flex flex-col gap-2">
-                        {routine.exercises.map(ex => (
-                            <div key={ex.id} className="flex items-center justify-between py-2 border-b border-zinc-800 last:border-0">
-                                <div>
-                                    <p className="text-white text-sm font-medium">{ex.exercise_name}</p>
-                                    <p className="text-zinc-500 text-xs">{ex.category}</p>
-                                </div>
-                                <p className="text-zinc-400 text-sm text-right">
-                                    {ex.sets} sets
-                                    {ex.reps ? ` × ${ex.reps}` : ''}
-                                    {ex.hold_time_seconds ? ` × ${ex.hold_time_seconds}s` : ''}
-                                </p>
+                        {Object.entries(sections).map(([sectionName, sectionExercises]) => (
+                            <div key={sectionName} className="mb-4">
+                                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-2">{sectionName}</p>
+                                {sectionExercises.map(ex => (
+                                    <div key={ex.id} className="flex items-center justify-between py-2 border-b border-zinc-800 last:border-0">
+                                        <div>
+                                            <p className="text-white text-sm font-medium">{ex.exercise_name}</p>
+                                            <p className="text-zinc-500 text-xs">{ex.category}</p>
+                                        </div>
+                                        <p className="text-zinc-400 text-sm text-right">
+                                            {ex.sets} sets
+                                            {ex.reps ? ` × ${ex.reps}` : ''}
+                                            {ex.hold_time_seconds ? ` × ${ex.hold_time_seconds}s` : ''}
+                                        </p>
+                                    </div>
+                                ))}
                             </div>
                         ))}
                     </div>

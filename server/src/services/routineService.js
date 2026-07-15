@@ -177,9 +177,10 @@ const generateAndStoreRoutine = async (skillId) => {
             reps,
             hold_time_seconds,
             rest_seconds,
-            notes
+            notes,
+            section
           )
-          VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+          VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
           `,
           [
             routine.id,
@@ -190,6 +191,7 @@ const generateAndStoreRoutine = async (skillId) => {
             exercise.hold_seconds,
             exercise.rest_seconds,
             exercise.notes,
+            section.name,
           ],
         );
 
@@ -242,6 +244,7 @@ const getActiveRoutine = async (skillId) => {
           'hold_time_seconds', re.hold_time_seconds,
           'rest_seconds', re.rest_seconds,
           'notes', re.notes,
+          'section', re.section,   
           'exercise_name', e.name,
           'category', e.category
         )

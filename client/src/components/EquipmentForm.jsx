@@ -1,26 +1,17 @@
 import { useState } from "react";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { getEquipment, updateEquipment } from "../api/equipment";
 
 
-export default function EquipmentForm({ onSuccess }) {
+export default function EquipmentForm({ onSuccess, initialSelected = [] }) {
+    const [selected, setSelected] = useState(initialSelected)
 
-    const [selected, setSelected] = useState([]);
 
 
     const { data: equipment = [], isLoading } = useQuery({
         queryKey: ["equipment"],
         queryFn: getEquipment,
-    });
-
-
-    const mutation = useMutation({
-        mutationFn: updateEquipment,
-
-        onSuccess: () => {
-            onSuccess();
-        },
     });
 
 
@@ -41,6 +32,16 @@ export default function EquipmentForm({ onSuccess }) {
         mutation.mutate(selected);
     };
 
+
+    const queryClient = useQueryClient()
+
+    const mutation = useMutation({
+        mutationFn: updateEquipment,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['profile/equipment'] })
+            onSuccess()
+        }
+    })
 
     if (isLoading) {
         return <div className="text-white">Loading...</div>;

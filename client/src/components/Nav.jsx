@@ -9,7 +9,9 @@ function Nav() {
         { title: "Dashboard", href: '/dashboard' },
         { title: "Skill Picker", href: '/skills' },
         { title: "Log Workout", href: '/workout' },
-        { title: "History", href: '/history' }
+        { title: "History", href: '/history' },
+        { title: "Profile", href: '/profile' }
+
     ]
     return (
         <nav className="border-b border-zinc-800 bg-zinc-950 px-6 py-4">
