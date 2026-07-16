@@ -7,6 +7,7 @@ function buildRoutinePrompt({
   availableExercises,
   recentWorkouts,
   equipment,
+  otherActiveSkills
 }) {
   const completed =
     completedMilestones.length > 0
