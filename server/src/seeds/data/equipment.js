@@ -6,7 +6,12 @@ module.exports = async function seedEquipment(client) {
     ('Parallettes'),
     ('Resistance Bands'),
     ('Dip Bars'),
-    ('Floor')
+    ('Floor'),
+    ('Wall'),
+    ('Bodyweight'),
+    ('Ab Wheel'),
+    ('Foam Roller'),
+    ('Bench')
     ON CONFLICT (name) DO NOTHING
   `);
   console.log("Equipment seeded.");

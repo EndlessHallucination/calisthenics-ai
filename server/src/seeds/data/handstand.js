@@ -7,9 +7,9 @@ module.exports = async function seedHandstand(client) {
   `,
     [
       "Handstand",
-      "pushing",
-      "beginner",
-      "A fundamental inverted balance skill performed on the hands. Develops shoulder strength, body awareness, balance, and overhead stability.",
+      "handstand",
+      "intermediate",
+      "A fundamental inverted balance skill performed on the hands. Develops shoulder stability, body awareness, alignment, and balance control.",
     ],
   );
 
@@ -25,23 +25,16 @@ module.exports = async function seedHandstand(client) {
     VALUES
       ($1, 'Wall Handstand', 1, 30,
        'Hold a chest-to-wall handstand with a straight body line.',
-       'Push tall through the shoulders and maintain a hollow body.'),
-
-      ($1, 'Handstand', 2, 20,
-       'Freestanding handstand with full body control.',
-       'Focus on balance using fingertips rather than excessive shoulder movement.'),
-
+       'Push tall through the shoulders and maintain a hollow body position.'),
+      ($1, 'Freestanding Handstand', 2, 10,
+       'Balance in a freestanding handstand with full body control.',
+       'Use fingertip pressure and shoulder adjustments to maintain balance.'),
       ($1, 'Tuck Handstand', 3, 15,
        'Balance in a tucked handstand with knees close to the chest.',
-       'Helps improve balance and compression.'),
-
+       'Develop balance control and compression strength.'),
       ($1, 'Straddle Handstand', 4, 15,
-       'Hold a freestanding handstand with legs straddled.',
-       'A wider straddle makes balancing easier while building control.'),
-
-      ($1, 'One Arm Handstand', 5, 5,
-       'Balance on a single arm with complete body control.',
-       'Requires excellent balance, shoulder strength, and body alignment.')
+       'Hold a freestanding handstand with legs extended in a straddle position.',
+       'Use the wider leg position to improve balance control.')
     ON CONFLICT (skill_id, sequence) DO NOTHING
   `,
     [skillId],
@@ -50,53 +43,24 @@ module.exports = async function seedHandstand(client) {
   await client.query(`
     INSERT INTO exercises (name, category, equipment, difficulty, description)
     VALUES
-      ('Wall Plank', 'pushing', 'wall', 'beginner',
-       'Face the wall in a plank position with feet against the wall to build overhead stability.'),
-
-      ('Wall Headstand', 'pushing', 'wall', 'beginner',
-       'Hold a headstand against the wall to develop inversion confidence.'),
-
-      ('Wall Handstand Hold', 'pushing', 'wall', 'beginner',
-       'Chest-to-wall handstand focusing on straight body alignment.'),
-
-      ('Freestanding Handstand Hold', 'pushing', 'bodyweight', 'intermediate',
-       'Balance in a freestanding handstand using fingertip control.'),
-
-      ('Tuck Handstand Hold', 'pushing', 'bodyweight', 'intermediate',
+      ('Wall Plank', 'pushing', 'Wall', 'beginner',
+       'Face the wall in a plank position with feet elevated against the wall to build inversion confidence.'),
+      ('Wall Headstand', 'pushing', 'Wall', 'beginner',
+       'Hold a supported headstand against the wall to develop comfort being inverted.'),
+      ('Wall Walk', 'pushing', 'Wall', 'beginner',
+       'Walk the feet up a wall into a handstand position to develop strength and inversion control.'),
+      ('Wall Handstand Hold', 'pushing', 'Wall', 'beginner',
+       'Perform a chest-to-wall handstand focusing on straight body alignment and shoulder elevation.'),
+      ('Freestanding Handstand Hold', 'pushing', 'Bodyweight', 'intermediate',
+       'Balance in a freestanding handstand using fingertip control and shoulder adjustments.'),
+      ('Tuck Handstand Hold', 'pushing', 'Bodyweight', 'intermediate',
        'Perform a tucked handstand emphasizing balance and compression.'),
-
-      ('Straddle Handstand Hold', 'pushing', 'bodyweight', 'advanced',
-       'Balance with legs straddled while maintaining a straight torso.'),
-
-      ('One Arm Handstand Hold', 'pushing', 'bodyweight', 'elite',
-       'Balance on one hand while maintaining body tension.'),
-
-      ('Wall Handstand Push-up Negative', 'pushing', 'wall', 'intermediate',
-       'Lower slowly from a wall handstand toward the head with full control.'),
-
-      ('Wall Handstand Push-up', 'pushing', 'wall', 'intermediate',
-       'Perform full handstand push-ups against a wall.'),
-
-      ('Headstand Push-up', 'pushing', 'bodyweight', 'intermediate',
-       'Press from the headstand position until the elbows are fully extended.'),
-
-      ('Handstand Push-up', 'pushing', 'bodyweight', 'advanced',
-       'Perform a strict freestanding handstand push-up.'),
-
-      ('Shoulder Stand', 'pushing', 'bodyweight', 'beginner',
-       'Hold a shoulder stand to develop inversion awareness and compression.'),
-
-      ('Wall Shoulder Taps', 'pushing', 'wall', 'intermediate',
-       'Alternate lifting one hand from a wall handstand to improve balance.'),
-
-      ('Pike Push-up', 'pushing', 'bodyweight', 'beginner',
-       'A bodyweight pressing exercise developing overhead pushing strength.'),
-
-      ('Hollow Body Hold', 'core', 'bodyweight', 'beginner',
-       'Hold a hollow body position while keeping the lower back pressed into the floor.'),
-
-      ('Wall Walk', 'pushing', 'wall', 'beginner',
-       'Walk the feet up a wall into a chest-to-wall handstand.')
+      ('Straddle Handstand Hold', 'pushing', 'Bodyweight', 'advanced',
+       'Balance in a straddle handstand while maintaining controlled body alignment.'),
+      ('Wall Shoulder Taps', 'pushing', 'Wall', 'intermediate',
+       'Alternate lifting one hand from a wall handstand to improve weight shifting and balance.'),
+      ('Hollow Body Hold', 'core', 'Bodyweight', 'beginner',
+       'Maintain a hollow body position with lower back pressed into the floor.')
     ON CONFLICT (name) DO NOTHING
   `);
 
@@ -110,40 +74,26 @@ module.exports = async function seedHandstand(client) {
     VALUES
       ($1, $2, 'warmup'),
       ($1, $3, 'warmup'),
-      ($1, $4, 'progression'),
+      ($1, $4, 'warmup'),
       ($1, $5, 'progression'),
       ($1, $6, 'progression'),
       ($1, $7, 'progression'),
-      ($1, $8, 'strength'),
-      ($1, $9, 'strength'),
-      ($1, $10, 'strength'),
-      ($1, $11, 'strength'),
-      ($1, $12, 'accessory'),
-      ($1, $13, 'accessory'),
-      ($1, $14, 'strength'),
-      ($1, $15, 'accessory'),
-      ($1, $16, 'warmup'),
-      ($1, $17, 'warmup')
+      ($1, $8, 'progression'),
+      ($1, $9, 'accessory'),
+      ($1, $10, 'accessory')
     ON CONFLICT (skill_id, exercise_id, purpose) DO NOTHING
   `,
     [
       skillId,
       exerciseMap["Wall Plank"],
       exerciseMap["Wall Headstand"],
+      exerciseMap["Wall Walk"],
       exerciseMap["Wall Handstand Hold"],
       exerciseMap["Freestanding Handstand Hold"],
       exerciseMap["Tuck Handstand Hold"],
       exerciseMap["Straddle Handstand Hold"],
-      exerciseMap["One Arm Handstand Hold"],
-      exerciseMap["Wall Handstand Push-up Negative"],
-      exerciseMap["Wall Handstand Push-up"],
-      exerciseMap["Headstand Push-up"],
-      exerciseMap["Handstand Push-up"],
-      exerciseMap["Shoulder Stand"],
       exerciseMap["Wall Shoulder Taps"],
-      exerciseMap["Pike Push-up"],
       exerciseMap["Hollow Body Hold"],
-      exerciseMap["Wall Walk"],
     ],
   );
 

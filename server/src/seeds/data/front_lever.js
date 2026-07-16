@@ -26,19 +26,15 @@ module.exports = async function seedFrontLever(client) {
       ($1, 'Tuck Front Lever', 1, 10,
        'Hold a tucked position with knees pulled to chest, body horizontal beneath the bar.',
        'Focus on scapular depression and retraction. Keep arms straight throughout.'),
-
       ($1, 'Advanced Tuck Front Lever', 2, 10,
        'Hold with knees tucked but back parallel to the ground, hips slightly extended.',
        'Back must be flat and parallel to the floor. Squeeze the lats hard.'),
-
       ($1, 'One Leg Front Lever', 3, 8,
        'Hold with one leg fully extended and one leg tucked, body as horizontal as possible.',
        'Alternate legs between sets. Keep the extended leg straight and pointed.'),
-
       ($1, 'Straddle Front Lever', 4, 5,
        'Hold with both legs extended and straddled wide apart.',
        'Wider straddle reduces difficulty. Work toward closing the straddle over time.'),
-
       ($1, 'Full Front Lever', 5, 5,
        'Hold with both legs together and fully extended, body perfectly horizontal.',
        'The complete skill. Body must be rigid from head to toe with no hip sag.')
@@ -50,50 +46,28 @@ module.exports = async function seedFrontLever(client) {
   await client.query(`
     INSERT INTO exercises (name, category, equipment, difficulty, description)
     VALUES
-      ('Scap Pull-ups', 'pulling', 'bar', 'beginner',
+      ('Scap Pull-ups', 'pulling', 'Pull-up Bar', 'beginner',
        'Hang from a bar with straight arms. Raise the body by depressing and retracting the scapula only. No elbow bend.'),
-
-      ('Tuck Front Lever Hold', 'pulling', 'bar', 'beginner',
+      ('Tuck Front Lever Hold', 'pulling', 'Pull-up Bar', 'beginner',
        'Hold a tucked front lever with knees to chest and body horizontal beneath the bar.'),
-
-      ('Advanced Tuck Front Lever Hold', 'pulling', 'bar', 'intermediate',
+      ('Advanced Tuck Front Lever Hold', 'pulling', 'Pull-up Bar', 'intermediate',
        'Hold with knees tucked and back parallel to the floor. Hips slightly extended.'),
-
-      ('One Leg Front Lever Hold', 'pulling', 'bar', 'intermediate',
+      ('One Leg Front Lever Hold', 'pulling', 'Pull-up Bar', 'intermediate',
        'Hold front lever with one leg fully extended and one leg tucked.'),
-
-      ('Straddle Front Lever Hold', 'pulling', 'bar', 'advanced',
+      ('Straddle Front Lever Hold', 'pulling', 'Pull-up Bar', 'advanced',
        'Hold front lever with both legs extended and straddled wide.'),
-
-      ('Full Front Lever Hold', 'pulling', 'bar', 'advanced',
+      ('Full Front Lever Hold', 'pulling', 'Pull-up Bar', 'advanced',
        'Hold full front lever with legs together and body perfectly horizontal.'),
-
-      ('Tuck Front Lever Row', 'pulling', 'bar', 'beginner',
-       'From a tuck front lever position, pull the body up toward the bar by bending the elbows.'),
-
-      ('Advanced Tuck Front Lever Row', 'pulling', 'bar', 'intermediate',
-       'From an advanced tuck front lever, row the body up toward the bar with controlled movement.'),
-
-      ('Straddle Front Lever Row', 'pulling', 'bar', 'advanced',
-       'From a straddle front lever, perform a rowing motion pulling the body toward the bar.'),
-
-      ('Front Lever Row', 'pulling', 'bar', 'advanced',
-       'From a full front lever, row the body up to the bar with straight body position.'),
-
-      ('Front Lever Raises', 'pulling', 'bar', 'advanced',
+      ('Front Lever Raises', 'pulling', 'Pull-up Bar', 'advanced',
        'From a dead hang, raise the body to a front lever position with straight arms.'),
-
-      ('Ice Cream Makers', 'pulling', 'bar', 'intermediate',
+      ('Ice Cream Makers', 'pulling', 'Pull-up Bar', 'intermediate',
        'From a tuck front lever, rotate the body up to a tuck inverted hang and back in a controlled arc.'),
-
-      ('Hanging Knee Raises', 'pulling', 'bar', 'beginner',
-       'Hang from a bar and raise the knees to the chest in a controlled motion. Builds core and hip flexor strength.'),
-
-      ('Hollow Body Hold', 'core', 'bodyweight', 'beginner',
+      ('Hanging Knee Raises', 'pulling', 'Pull-up Bar', 'beginner',
+       'Hang from a bar and raise the knees to the chest in a controlled motion.'),
+      ('Hollow Body Hold', 'core', 'Bodyweight', 'beginner',
        'Lie on the floor and hold a hollow body position with arms overhead and lower back pressed into the ground.'),
-
-      ('Dragon Flag Negatives', 'core', 'bar', 'intermediate',
-       'From a vertical position, lower the body slowly to horizontal while keeping it rigid. Use a bench for support.')
+      ('Dragon Flag Negatives', 'core', 'Pull-up Bar', 'intermediate',
+       'From a vertical position, lower the body slowly to horizontal while keeping it rigid.')
     ON CONFLICT (name) DO NOTHING
   `);
 
@@ -113,13 +87,9 @@ module.exports = async function seedFrontLever(client) {
       ($1, $7, 'progression'),
       ($1, $8, 'strength'),
       ($1, $9, 'strength'),
-      ($1, $10, 'strength'),
-      ($1, $11, 'strength'),
-      ($1, $12, 'strength'),
-      ($1, $13, 'strength'),
-      ($1, $14, 'warmup'),
-      ($1, $15, 'accessory'),
-      ($1, $16, 'accessory')
+      ($1, $10, 'warmup'),
+      ($1, $11, 'accessory'),
+      ($1, $12, 'accessory')
     ON CONFLICT (skill_id, exercise_id, purpose) DO NOTHING
   `,
     [
@@ -130,10 +100,6 @@ module.exports = async function seedFrontLever(client) {
       exerciseMap["One Leg Front Lever Hold"],
       exerciseMap["Straddle Front Lever Hold"],
       exerciseMap["Full Front Lever Hold"],
-      exerciseMap["Tuck Front Lever Row"],
-      exerciseMap["Advanced Tuck Front Lever Row"],
-      exerciseMap["Straddle Front Lever Row"],
-      exerciseMap["Front Lever Row"],
       exerciseMap["Front Lever Raises"],
       exerciseMap["Ice Cream Makers"],
       exerciseMap["Hanging Knee Raises"],
