@@ -52,6 +52,15 @@ const generateAndStoreRoutine = async (skillId) => {
 
     const availableExercises = availableExercisesResult.rows;
 
+    const generalExercisesResult = await client.query(`
+    SELECT e.* FROM exercises e
+    WHERE e.id NOT IN (
+    SELECT exercise_id FROM skill_exercises
+    )
+    `);
+
+    const generalExercises = generalExercisesResult.rows;
+
     const recentWorkoutsResult = await client.query(
       `
       SELECT
@@ -129,6 +138,7 @@ const generateAndStoreRoutine = async (skillId) => {
       recentWorkouts,
       equipment,
       otherActiveSkills,
+      generalExercises,
     });
 
     const routineData = await generateRoutine(routinePrompt);
@@ -172,9 +182,9 @@ const generateAndStoreRoutine = async (skillId) => {
 
     for (const section of routineData.sections) {
       for (const exercise of section.exercises) {
-        const dbExercise = availableExercises.find(
-          (e) => e.name === exercise.exercise,
-        );
+        const dbExercise =
+          availableExercises.find((e) => e.name === exercise.exercise) ||
+          generalExercises.find((e) => e.name === exercise.exercise);
 
         if (!dbExercise) {
           console.warn(`Exercise "${exercise.exercise}" not found.`);

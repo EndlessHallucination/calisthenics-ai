@@ -95,6 +95,20 @@ const createProfile = async (data) => {
       );
     }
 
+    const bodyweightResult = await client.query(
+      `SELECT id FROM equipment WHERE name = 'Bodyweight'`,
+    );
+    const bodyweightId = bodyweightResult.rows[0]?.id;
+
+    if (bodyweightId) {
+      await client.query(
+        `INSERT INTO profile_equipment (profile_id, equipment_id)
+     VALUES (1, $1)
+     ON CONFLICT DO NOTHING`,
+        [bodyweightId],
+      );
+    }
+
     await client.query("COMMIT");
     const equipmentResult = await client.query(`
     SELECT e.id,e.name

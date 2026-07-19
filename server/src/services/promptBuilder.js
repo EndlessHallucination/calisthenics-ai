@@ -7,7 +7,8 @@ function buildRoutinePrompt({
   availableExercises,
   recentWorkouts,
   equipment,
-  otherActiveSkills
+  otherActiveSkills,
+  generalExercises,
 }) {
   const completed =
     completedMilestones.length > 0
@@ -47,6 +48,16 @@ function buildRoutinePrompt({
           })
           .join("\n")
       : "- No previous workouts.";
+
+  const general =
+    generalExercises.length > 0
+      ? generalExercises
+          .map(
+            (e) =>
+              `- ${e.name} (${e.category}${e.equipment ? `, ${e.equipment}` : ""})`,
+          )
+          .join("\n")
+      : "- None";
 
   return `
 You are an elite calisthenics coach specializing in bodyweight strength, skill progression, and injury prevention.
@@ -104,6 +115,13 @@ ${
     : "No other skills currently being trained."
 }
 
+=========================
+GENERAL EXERCISES
+=========================
+Use these for warmup and cooldown only.
+Do NOT use these as main skill work.
+
+${general}
 
 =========================
 COMPLETED MILESTONES
