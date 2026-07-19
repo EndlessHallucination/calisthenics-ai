@@ -207,6 +207,12 @@ Do NOT include text before or after the JSON.
 
 Use this exact schema:
 
+Do NOT add suffixes like "(Assisted)", "(Modified)", or "(Band)" to exercise names.
+
+Use ONLY the exact exercise names from the provided lists.
+
+All numeric values must be whole integers. Do NOT use decimals or floats.
+
 {
   "title": "string",
   "goal": "string",
