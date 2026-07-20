@@ -1,15 +1,16 @@
 module.exports = async function seedMuscleUp(client) {
   await client.query(
     `
-    INSERT INTO skills (name, category, difficulty, description)
-    VALUES ($1, $2, $3, $4)
-    ON CONFLICT (name) DO NOTHING
+    INSERT INTO skills (name, category, difficulty, description, required_equipment)
+    VALUES ($1, $2, $3, $4, $5)
+    ON CONFLICT (name) DO UPDATE SET required_equipment = EXCLUDED.required_equipment
   `,
     [
       "Muscle-Up",
       "pulling",
       "intermediate",
       "A dynamic pulling skill where the athlete transitions from a pull-up position over the bar into a dip position. Requires explosive pulling power, transition strength, and pushing ability.",
+      ["Pull-up Bar"],
     ],
   );
 

@@ -44,6 +44,12 @@ const generateAndStoreRoutine = async (skillId) => {
     );
     const availableExercises = availableExercisesResult.rows;
 
+    const parseHoldSeconds = (val) => {
+      if (val === null || val === undefined) return null;
+      const num = parseInt(val);
+      return isNaN(num) ? null : num;
+    };
+
     const generalExercisesResult = await client.query(`
       SELECT e.* FROM exercises e
       WHERE e.id NOT IN (SELECT exercise_id FROM skill_exercises)
@@ -167,7 +173,7 @@ const generateAndStoreRoutine = async (skillId) => {
             orderIndex,
             exercise.sets,
             exercise.reps,
-            exercise.hold_seconds ? Math.round(exercise.hold_seconds) : null,
+            parseHoldSeconds(exercise.hold_seconds),
             exercise.rest_seconds,
             exercise.notes,
             section.name,

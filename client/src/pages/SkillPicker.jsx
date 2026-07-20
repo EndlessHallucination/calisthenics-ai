@@ -1,9 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query'
-
 import { getSkills, startSkill, getActiveSkills } from "../api/skills"
-
+import { getProfileEquipment } from '../api/equipment'
 
 export default function SkillPicker() {
     const navigate = useNavigate();
@@ -21,6 +20,10 @@ export default function SkillPicker() {
         queryFn: getActiveSkills
     })
 
+    const { data: userEquipment = [] } = useQuery({
+        queryKey: ['profile/equipment'],
+        queryFn: getProfileEquipment
+    })
 
     const [error, setError] = useState(null)
 
@@ -35,11 +38,9 @@ export default function SkillPicker() {
         }
     })
 
-
     const handleStart = (skillId) => {
         mutate(skillId)
     }
-
 
     if (isLoading) return <div>Loading...</div>;
 
@@ -55,6 +56,11 @@ export default function SkillPicker() {
             <div className="grid grid-cols-1 gap-4">
                 {skills && skills.map(skill => {
                     const isActive = activeSkills?.some(s => s.id === skill.id)
+                    const userEquipmentNames = userEquipment.map(e => e.name)
+                    const missing = (skill.required_equipment || []).filter(
+                        e => !userEquipmentNames.includes(e)
+                    )
+
                     return (
                         <div
                             key={skill.id}
@@ -63,6 +69,11 @@ export default function SkillPicker() {
                             <div>
                                 <h2 className="text-white font-bold text-lg">{skill.name}</h2>
                                 <p className="text-zinc-500 text-sm capitalize">{skill.difficulty}</p>
+                                {!isActive && missing.length > 0 && (
+                                    <p className="text-yellow-400 text-xs mt-1">
+                                        ⚠ Requires: {missing.join(', ')}
+                                    </p>
+                                )}
                             </div>
                             <button
                                 onClick={() => handleStart(skill.id)}

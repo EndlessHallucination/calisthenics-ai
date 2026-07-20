@@ -205,13 +205,16 @@ Do NOT explain your decisions.
 
 Do NOT include text before or after the JSON.
 
-Use this exact schema:
 
 Do NOT add suffixes like "(Assisted)", "(Modified)", or "(Band)" to exercise names.
 
 Use ONLY the exact exercise names from the provided lists.
 
 All numeric values must be whole integers. Do NOT use decimals or floats.
+
+Use this exact schema:
+
+hold_seconds MUST be a single integer or null. NEVER include text or ranges in this field.
 
 {
   "title": "string",

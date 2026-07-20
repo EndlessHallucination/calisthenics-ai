@@ -12,8 +12,7 @@ const generateRoutine = async (prompt, retries = 1) => {
   });
 
   const data = await response.json();
-  console.log("Ollama raw response:", data.response); // ← add this
-
+  console.log("Ollama raw response:", data.response);
   try {
     return JSON.parse(data.response);
   } catch {
