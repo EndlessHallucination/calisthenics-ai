@@ -9,6 +9,10 @@ const seedFrontLever = require("./data/front_lever");
 const seedHandstand = require("./data/handstand");
 const seedMuscleUp = require("./data/muscle_up");
 const seedPlanche = require("./data/planche");
+const seedHSPU = require("./data/hspu");
+const seedBackLever = require("./data/back_lever");
+const seedLSit = require("./data/l_sit");
+const seedOneArmPullup = require("./data/one_arm_pullup");
 
 async function run() {
   const client = await pool.connect();
@@ -21,6 +25,10 @@ async function run() {
     await seedHandstand(client);
     await seedMuscleUp(client);
     await seedPlanche(client);
+    await seedHSPU(client);
+    await seedBackLever(client);
+    await seedLSit(client);
+    await seedOneArmPullup(client);
 
     await client.query("COMMIT");
     console.log("All seeds completed successfully.");

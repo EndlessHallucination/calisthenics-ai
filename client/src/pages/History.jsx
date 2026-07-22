@@ -63,8 +63,12 @@ export default function History() {
                     >
                         {skill.name}
                     </button>
+
                 ))}
             </div>
+            {!selectedSkillId && (
+                <p className="text-zinc-500 text-sm">Select a skill to view your workout history.</p>
+            )}
 
             {workoutsLoading && (
                 <p className="text-zinc-500 text-sm">Loading workouts...</p>
