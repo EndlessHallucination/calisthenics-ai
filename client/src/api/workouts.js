@@ -1,28 +1,53 @@
 import client from "./client";
 
 export const createWorkout = async (skillId) => {
-  const { data } = await client.post("/workouts", { skill_id: skillId });
-  return data;
+  try {
+    const { data } = await client.post("/workouts", { skill_id: skillId });
+    return data;
+  } catch (error) {
+    if (error.response?.status === 404) return null;
+    throw error;
+  }
 };
 
 export const logExercises = async (workoutId, exercises) => {
-  const { data } = await client.post(`/workouts/${workoutId}/exercises`, {
-    exercises,
-  });
-  return data;
+  try {
+    const { data } = await client.post(`/workouts/${workoutId}/exercises`, {
+      exercises,
+    });
+    return data;
+  } catch (error) {
+    if (error.response?.status === 404) return null;
+    throw error;
+  }
 };
 
 export const getWorkouts = async (skillId) => {
-  const { data } = await client.get(`/workouts?skill_id=${skillId}`);
-  return data;
+  try {
+    const { data } = await client.get(`/workouts?skill_id=${skillId}`);
+    return data;
+  } catch (error) {
+    if (error.response?.status === 404) return [];
+    throw error;
+  }
 };
 
 export const getWorkoutExercises = async (workoutId) => {
-  const { data } = await client.get(`/workouts/${workoutId}/exercises`);
-  return data;
+  try {
+    const { data } = await client.get(`/workouts/${workoutId}/exercises`);
+    return data;
+  } catch (error) {
+    if (error.response?.status === 404) return [];
+    throw error;
+  }
 };
 
 export const deleteWorkout = async (workoutId) => {
-  const { data } = await client.delete(`/workouts/${workoutId}`);
-  return data;
+  try {
+    const { data } = await client.delete(`/workouts/${workoutId}`);
+    return data;
+  } catch (error) {
+    if (error.response?.status === 404) return null;
+    throw error;
+  }
 };

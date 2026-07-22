@@ -11,8 +11,13 @@ export const getActiveRoutine = async (skillId) => {
 };
 
 export const generateRoutine = async (skillId) => {
-  const { data } = await client.post("/routines/generate", {
-    skill_id: skillId,
-  });
-  return data;
+  try {
+    const { data } = await client.post("/routines/generate", {
+      skill_id: skillId,
+    });
+    return data;
+  } catch (error) {
+    if (error.response?.status === 404) return null;
+    throw error;
+  }
 };
