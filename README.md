@@ -125,26 +125,29 @@ Every routine generation sends the following to the local LLM:
 - Other active skills (to avoid muscle group conflicts)
 - Exercise database filtered by skill and equipment
 
-### Architecture
+# Project Structure
 
+```text
 server/
-├── src/
-│ ├── config/ # DB and Ollama config
-│ ├── migrations/ # SQL migration files
-│ ├── seeds/ # Skill and exercise seed data
-│ ├── services/ # Business logic
-│ │ ├── contextService.js # Assembles AI prompt context
-│ │ ├── routineService.js # Routine generation and storage
-│ │ ├── promptBuilder.js # Builds the LLM prompt
-│ │ └── ollamaService.js # Ollama API client
-│ ├── routes/ # Express route handlers
-│ └── app.js
+└── src/
+    ├── config/
+    ├── migrations/
+    ├── routes/
+    ├── services/
+    │   ├── contextService.js
+    │   ├── promptBuilder.js
+    │   ├── routineService.js
+    │   └── ollamaService.js
+    ├── seeds/
+    └── server.js
+
 client/
-├── src/
-│ ├── api/ # Axios API calls
-│ ├── components/ # Reusable UI components
-│ ├── pages/ # Page components
-│ └── App.jsx
+└── src/
+    ├── api/
+    ├── components/
+    ├── pages/
+    └── App.jsx
+```
 
 ---
 
@@ -171,7 +174,7 @@ client/
 - [ ] Progress charts and analytics
 - [ ] Streak tracking
 - [ ] Seeding more skills
- 
+
 ## Philosophy
 
 Most fitness apps are either too generic or locked behind subscriptions. Calisthenio runs locally, respects your privacy, and gives you a coach that actually knows your progression history — not just a random workout generator.
