@@ -29,6 +29,13 @@ const buildRoutineContext = async (skillId, client) => {
   );
   const completedMilestones = completedMilestonesResult.rows;
 
+  //total milestones
+  const milestonesResult = await client.query(
+    `SELECT COUNT(*) as total FROM milestones WHERE skill_id = $1`,
+    [skillId],
+  );
+  const totalMilestones = parseInt(milestonesResult.rows[0].total);
+
   // available exercises
 
   const availableExercisesResult = await client.query(
@@ -115,6 +122,7 @@ const buildRoutineContext = async (skillId, client) => {
     skill,
     skillProgress,
     currentMilestone,
+    totalMilestones,
     nextMilestone,
     completedMilestones,
     availableExercises,

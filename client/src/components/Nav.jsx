@@ -17,7 +17,7 @@ function Nav() {
         <nav className="border-b border-zinc-800 bg-zinc-950 px-6 py-4">
             <div className="max-w-4xl mx-auto flex items-center justify-between">
                 <Link to="/" className="text-indigo-400 font-bold text-lg tracking-tight">
-                    Calisthenics AI
+                    CalisthenIO
                 </Link>
                 <div className="flex gap-6">
                     {navLinks.map((link) => (

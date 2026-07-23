@@ -2,6 +2,7 @@ function buildRoutinePrompt({
   profile,
   skill,
   currentMilestone,
+  totalMilestones,
   nextMilestone,
   completedMilestones,
   availableExercises,
@@ -122,6 +123,14 @@ ${
 Focus on increasing strength, hold time, control and consistency.`
 }
 
+=========================
+PROGRESSION RULES
+=========================
+- Only prescribe exercises AT or BELOW the current milestone level.
+- Do NOT prescribe exercises for milestones the athlete has not yet reached.
+- Current milestone is: ${currentMilestone.name} (Stage ${currentMilestone.sequence} of ${totalMilestones})
+- Do NOT include hold-based exercises targeting durations beyond what the athlete can currently achieve.
+- For reps, always use a specific number like "5" or "8-10". Never use "Max effort" or vague descriptions.
 
 =========================
 CONCURRENT SKILLS
@@ -131,6 +140,7 @@ ${
     ? `The athlete is also training:\n${otherActiveSkills.map((s) => `- ${s.name} (${s.category})`).join("\n")}\n\nConsider recovery and avoid overloading the same muscle groups.`
     : "No other skills currently being trained."
 }
+
 
 =========================
 GENERAL EXERCISES
