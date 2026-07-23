@@ -125,7 +125,7 @@ Every routine generation sends the following to the local LLM:
 - Other active skills (to avoid muscle group conflicts)
 - Exercise database filtered by skill and equipment
 
-# Project Structure
+## Project Structure
 
 ```text
 server/
